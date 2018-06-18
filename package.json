@@ -1,0 +1,27 @@
+{
+  "name": "RxOfLife",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --hot --inline"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@webpack-cli/init": "0.0.8",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^4.19.1",
+    "html-webpack-plugin": "^4.0.0-alpha",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.8"
+  },
+  "dependencies": {
+    "rxjs": "^6.2.1"
+  }
+}
