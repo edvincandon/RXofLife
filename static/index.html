@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+		<style>
+			body {
+				background: #EFF4F1;
+			}
+			#world {
+				background: #949A90;
+				position: relative;
+				border-radius: 20px;
+				margin-top: 25px;
+				margin-left: 25px;
+				border: 10px solid #949A90;
+			}
+			.cell {
+				position: absolute;
+				background: #1B1A1A;
+				height: 10px;
+				width: 10px;
+				border: 1px solid rgba(0,0,0,0.3);
+			}
+			.cell.dirty {
+				background: #050404;
+			}
+			.cell.alive {
+				background: #93D13C;
+			}
+		</style>
+  </head>
+  <body>
+		<div id="world"></div>
+		<button type="submit" id="randomSeed">Random Seed</type>
+  </body>
+</html>

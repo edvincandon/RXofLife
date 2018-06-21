@@ -29,7 +29,8 @@ module.exports = {
 
 	plugins: [
 		new HtmlWebpackPlugin({
-			title: 'RxOfLife'
+			title: 'RxOfLife',
+			template: path.resolve(__dirname, 'static') + '/index.html'
 		})
 	],
 
