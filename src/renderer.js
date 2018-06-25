@@ -6,7 +6,7 @@ export default class Renderer {
 	constructor({ cellSize }) {
 		this.world = document.getElementById('world');
 		this.ctx = this.world.getContext('2d');
-		this.cellSize = cellSize;
+		this.cellSize = cellSize * window.devicePixelRatio;
 		this.getCursorPosition = this.getCursorPosition.bind(this);
 		this.init({ rows: 0, columns: 0 });
 	}

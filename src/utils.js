@@ -13,8 +13,8 @@ const DELTA_Y = [
 
 export function getGridFromWindow(cellSize) {
 	return ({
-		columns: Math.ceil(window.innerWidth / cellSize),
-		rows: Math.ceil(window.innerHeight / cellSize)
+		columns: Math.ceil((window.innerWidth / window.devicePixelRatio) / cellSize),
+		rows: Math.ceil((window.innerHeight / window.devicePixelRatio) / cellSize)
 	});
 }
 
