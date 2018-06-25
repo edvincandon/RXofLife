@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	/* main game ticker */
 	const ticks$ = pause$
-		.pipe(switchMap(val => (val ? interval(0, animationFrameScheduler) : NEVER)));
+		.pipe(switchMap(val => (val ? interval(50, animationFrameScheduler) : NEVER)));
 
 	/* main game loop */
 	const state$ = world$
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	/* merge source streams */
 	merge(click$, resize$, reset$).subscribe(world$);
 
-	pause$.subscribe(val => PLAY_BUTTON.innerHTML = val ? '❚❚' : '►');
+	pause$.subscribe(val => PLAY_BUTTON.innerHTML = val ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>');
 
 	spawn$.next({
 		type: 'single',

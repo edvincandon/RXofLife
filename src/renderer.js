@@ -28,7 +28,8 @@ export default class Renderer {
 		const { cellSize, ctx } = this;
 		updateMap.forEach(([x, y, status]) => {
 			ctx.fillStyle = status === 1 ? COLOR_ALIVE : COLOR_DIRTY;
-			ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+			/* account for border */
+			ctx.fillRect(x * cellSize + 1, y * cellSize + 1, cellSize - 1 , cellSize - 1);
 		});
 	}
 
