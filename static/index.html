@@ -3,35 +3,67 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <title><%= htmlWebpackPlugin.options.title %></title>
+		<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
 		<style>
 			body {
-				background: #EFF4F1;
+				background: #260F26;
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				overflow: hidden;
 			}
 			#world {
-				background: #949A90;
+				background: #260F26;
 				position: relative;
-				margin-top: 25px;
-				margin-left: 25px;
+				width: 100%;
+				height: 100%;
 				overflow: hidden;
-				border: 2px solid #949A90;
-			}
-			.cell {
 				position: absolute;
-				background: #1B1A1A;
-				height: 10px;
-				width: 10px;
-				border: 1px solid rgba(0,0,0,0.3);
 			}
-			.cell.dirty {
-				background: #050404;
+			#control {
+				position: absolute;
+				left: 0px;
+				bottom: 20px;
+				width: auto;
+				display: flex;
+				left: 20px;
+				height: 33px;
+				background: rgba(38,15,38,0.88);
+				opacity: 1;
+				padding: 20px;
 			}
-			.cell.alive {
-				background: #93D13C;
+			button {
+				position: relative;
+				margin-left: 10px;
+				margin-right: 10px;
+				border: 1px solid white;
+				height: 33px;
+				background: none;
+				padding: 0px 10px;
+				color: white;
+				outline: none;
+				font-family: 'Space Mono', monospace;
+				text-transform: uppercase;
+				letter-spacing: 1.2px;
+				cursor: pointer;
+			}
+			button:hover {
+				background: rgba(255,255,255,0.15);
+				border: 1px solid white;
+			}
+			button:focus {
+				outline: none;
+				background: rgba(255,255,255,0.05);
+				border: 1px solid white;
 			}
 		</style>
   </head>
   <body>
-		<div id="world"></div>
-		<button type="submit" id="randomSeed">Random Seed</type>
+		<canvas id="world"></canvas>
+		<div id="control">
+			<button type="submit" id="togglePlay">►</type>
+			<button type="submit" id="clear">Clear</type>
+			<button type="submit" id="randomSeed">Random Seed</type>
+		</div>
   </body>
 </html>
