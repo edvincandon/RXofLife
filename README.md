@@ -9,6 +9,8 @@ Game of life implementation in RXJS using canvas rendering. Could probably be op
 npm install
 npm run dev # start the dev server
 ```
+#### Tweak `MAX_CELLS` in `src/index.js` at your own risk to increase the max number of cells to be spawned. It defaults to 100,000.
+
 
 *Chrome might throw a fit and warn you about requestAnimationFrame handler violations - he's a nasty little lad*
 
