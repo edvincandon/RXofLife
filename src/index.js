@@ -19,11 +19,12 @@ import { gliderGun } from './shapes';
 const SEED_BUTTON = document.getElementById('randomSeed');
 const PLAY_BUTTON = document.getElementById('togglePlay');
 const CLEAR_BUTTON = document.getElementById('clear');
-const CELL_SIZE = 2;
 
+const CELL_SIZE = 3;
+const MAX_CELLS = 100000;
 
 document.addEventListener('DOMContentLoaded', () => {
-  const renderer = new Renderer({ cellSize: CELL_SIZE });
+  const renderer = new Renderer();
 
   const world$ = new Subject();
   const spawn$ = new Subject();
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	 * resize$ starts with null to trigger initial resize */
   const resize$ = fromEvent(window, 'resize').pipe(
     startWith(null),
-    map(() => createGrid(getGridFromWindow(CELL_SIZE))),
+    map(() => createGrid(getGridFromWindow({ base: CELL_SIZE, max: MAX_CELLS }))),
     shareReplay(1)
   );
 
@@ -45,21 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const click$ = fromEvent(renderer.world, 'click')
     .pipe(
       map(renderer.getCursorPosition),
-      withLatestFrom(spawn$, world$),
-      map(([[x, y], { cells }, { columns, rows, grid }]) =>
-        updateGrid({
-          grid,
-          cells: translateCells({ x, y, cells, columns, rows}),
-          columns,
-          rows
-        }))
+      withLatestFrom(spawn$, world$, ([x, y], { cells }, { columns, rows, grid, cellSize }) =>
+        ({ grid, cells: translateCells({ x, y, cells, columns, rows}), columns, rows, cellSize })),
+      map(updateGrid)
     );
 
   /* handle grid resets via seed or clear button */
   const reset$ = merge(seed$, clear$)
     .pipe(
-      withLatestFrom(resize$),
-      map(([random, { columns, rows }]) => createGrid({ columns, rows, random })));
+      withLatestFrom(resize$, (random, { columns, rows, cellSize }) => ({ columns, rows, random, cellSize })),
+      map(createGrid)
+    );
 
   /* main game ticker */
   const ticks$ = pause$
@@ -74,8 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* SUBSCRIPTIONS */
   /* draw initial frame and reinit renderer if needed */
-  world$.subscribe(({ grid, columns, rows, clear }) => {
-    if (clear) renderer.init({ columns, rows });
+  world$.subscribe(({ grid, columns, rows, clear, cellSize }) => {
+    if (clear) renderer.init({ columns, rows, cellSize });
     renderer.draw(grid.filter(cell => cell[2] === 1));
   });
   /* redraw */

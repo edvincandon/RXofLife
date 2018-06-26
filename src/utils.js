@@ -11,21 +11,26 @@ const DELTA_Y = [
   +1, +1, +1
 ];
 
-export function getGridFromWindow(cellSize) {
+export function getGridFromWindow({ max, base }) {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  const cellSize = (w * h / base) > max ? Math.ceil(Math.sqrt(w * h / max)) : base;
+
   return ({
-    columns: Math.ceil((window.innerWidth / window.devicePixelRatio) / cellSize),
-    rows: Math.ceil((window.innerHeight / window.devicePixelRatio) / cellSize)
+    columns: Math.ceil((window.innerWidth / window.devicePixelRatio) / cellSize * window.devicePixelRatio),
+    rows: Math.ceil((window.innerHeight / window.devicePixelRatio) / cellSize * window.devicePixelRatio),
+    cellSize
   });
 }
 
 /* create random grid of cells [x,y,state] */
-export function createGrid({ columns, rows, random = true, clear = true }) {
+export function createGrid({ columns, rows, random = true, clear = true, cellSize }) {
   const grid = [...Array(rows).keys()]
     .map((j) => [...Array(columns).keys()]
       .map((i) => [i, j, random ? Math.round(Math.random()) : 0]))
     .reduce((grid, row) => [...grid, ...row], []);
 
-  return ({ grid, columns, rows, clear });
+  return ({ grid, columns, rows, clear, cellSize });
 }
 
 /* find neighbors modulo width & height */
@@ -53,12 +58,12 @@ export function nextGeneration({ grid, columns, rows }) {
 }
 
 /* update grid with specific cells */
-export function updateGrid({ grid, cells = [], columns, rows }) {
+export function updateGrid({ grid, cells = [], columns, rows, cellSize }) {
   cells.forEach(([x, y]) => {
     grid[(y * columns) + x] = [x, y, 1];
   });
 
-  return ({ grid, columns, rows, clear: false });
+  return ({ grid, columns, rows, clear: false, cellSize });
 }
 
 /* translate shape coords to (x,y) coords */

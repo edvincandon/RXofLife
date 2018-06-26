@@ -3,17 +3,16 @@ const COLOR_ALIVE = '#71B48D';
 const COLOR_DIRTY = '#251F47';
 
 export default class Renderer {
-  constructor({ cellSize }) {
+  constructor() {
     this.world = document.getElementById('world');
     this.ctx = this.world.getContext('2d');
-    this.cellSize = cellSize * window.devicePixelRatio;
     this.getCursorPosition = this.getCursorPosition.bind(this);
-    this.init({ rows: 0, columns: 0 });
   }
 
-  init({ rows, columns }) {
+  init({ rows, columns, cellSize: _cellSize }) {
     this.width = columns;
     this.height = rows;
+    this.cellSize = _cellSize * window.devicePixelRatio;
     const { cellSize, world, height, width, ctx } = this;
 
     world.style.height = height * cellSize + 'px';
