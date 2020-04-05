@@ -1,0 +1,53 @@
+<!doctype html><html><head><meta http-equiv="Content-type" content="text/html; charset=utf-8"><title>RxOfLife</title><link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"><style>body {
+				background: #260F26;
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				overflow: hidden;
+			}
+			#world {
+				background: #260F26;
+				position: relative;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				position: absolute;
+			}
+			#control {
+				position: absolute;
+				left: 0px;
+				bottom: 20px;
+				width: auto;
+				display: flex;
+				left: 20px;
+				height: 33px;
+				background: rgba(38,15,38,0.88);
+				opacity: 1;
+				padding: 20px;
+        transform: translate3d(0,0,0);
+			}
+			button {
+				position: relative;
+				margin-left: 10px;
+				margin-right: 10px;
+				border: 1px solid white;
+				height: 33px;
+        min-width: 33px;
+				background: none;
+				padding: 0px 10px;
+				color: white;
+				outline: none;
+				font-family: 'Space Mono', monospace;
+				text-transform: uppercase;
+				letter-spacing: 1.2px;
+				cursor: pointer;
+			}
+			button:hover {
+				background: rgba(255,255,255,0.15);
+				border: 1px solid white;
+			}
+			button:focus {
+				outline: none;
+				background: rgba(255,255,255,0.05);
+				border: 1px solid white;
+			}</style></head><body><canvas id="world"></canvas><div id="control"><button type="submit" id="togglePlay">►<button type="submit" id="clear">Clear<button type="submit" id="randomSeed">Random Seed</button></button></button></div><script src="main.js"></script></body></html>
